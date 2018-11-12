@@ -1,0 +1,70 @@
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+
+.wp-block-cgb-block-image-clipper  {
+  background: $green;
+  border: 0.2rem solid $black;
+  color: $black;
+  margin: 0 auto;
+  max-width: 740px;
+  padding: 2rem;
+}
+
+.image-clipper-editor{
+	width: auto;
+	*{
+		display: inline-block;
+		vertical-align: middle;
+	}
+	.ic-btn{
+		width: 30px;
+		height: 30px;
+		padding: 10px;
+		border: 1px solid #ddd;
+		border-radius: 100%;
+		box-sizing: border-box;
+	}
+	.flex-column{
+		display: flex;
+		flex-direction: column;
+	}
+
+	&:hover{
+		.image-clipper{
+			border: 1px solid #dddddd;
+		}
+		.components-resizable-box__handle-right,
+		.components-resizable-box__handle-bottom{
+			opacity: 0.75;
+		}
+	}
+
+	.image-clipper{
+		border: 1px solid transparent;
+		overflow: hidden;
+		width:auto;
+		transition: border 0.5s;
+
+		.import-btn{
+			text-align: center;
+			width: 100%;
+			height: 100%;
+			min-width: 150px;
+			min-height: 150px;
+		}
+		img{
+			max-width: none;
+		}
+	}
+
+	.components-resizable-box__handle-right,
+	.components-resizable-box__handle-bottom{
+		opacity: 0;
+		transition: opacity 0.5s;
+	}
+
+}
