@@ -16,6 +16,9 @@
 
 .image-clipper-editor{
 	width: auto;
+	.clipper_parent{
+		width: 100% !important;
+	}
 	*{
 		display: inline-block;
 		vertical-align: middle;

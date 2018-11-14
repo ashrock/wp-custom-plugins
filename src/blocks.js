@@ -10,5 +10,4 @@
  */
 
 import './block/block.js';
-import './custom_content/block.js';
 import './on_column_block/index.js';

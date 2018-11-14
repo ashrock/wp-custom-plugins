@@ -20,6 +20,8 @@
 
 .image-clipper-editor {
   width: auto; }
+  .image-clipper-editor .clipper_parent {
+    width: 100% !important; }
   .image-clipper-editor * {
     display: inline-block;
     vertical-align: middle; }
@@ -62,11 +64,3 @@
     -webkit-transition: opacity 0.5s;
     -o-transition: opacity 0.5s;
     transition: opacity 0.5s; }
-/**
- * #.# Common SCSS
- *
- * Can include things like variables and mixins
- * that are used across the project.
-*/
-.hms-layout {
-  padding: 0px 40px; }

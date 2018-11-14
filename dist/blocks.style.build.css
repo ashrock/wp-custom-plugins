@@ -19,24 +19,3 @@
     height: 100%; }
   .image-clipper .image-clipper img {
     max-width: none; }
-/**
- * #.# Common SCSS
- *
- * Can include things like variables and mixins
- * that are used across the project.
-*/
-/**
- * #.# Styles
- *
- * CSS for both Frontend+Backend.
- */
-.image-clipper .image-clipper {
-  border: 1px solid #dddddd;
-  overflow: hidden;
-  width: auto; }
-  .image-clipper .image-clipper .import-btn {
-    text-align: center;
-    width: 100%;
-    height: 100%; }
-  .image-clipper .image-clipper img {
-    max-width: none; }
