@@ -1,10 +1,10 @@
 <?php
 /**
- * Plugin Name: Image Clipper — Gutenberg Block Plugin
+ * Plugin Name: CD Custom Plugins
  * Plugin URI: https://github.com/ahmadawais/create-guten-block/
- * Description: image-clipper — is a Gutenberg plugin created via create-guten-block.
- * Author: mrahmadawais, maedahbatool
- * Author URI: https://AhmadAwais.com/
+ * Description: Includes CD Image Sprite Clipper, CD Customizable Block
+ * Author: Ashrock West
+ * Author URI: https://fb.com/ashrockwest
  * Version: 0.0.1
  * License: GPL2+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt

@@ -10,4 +10,4 @@
  */
 
 import './block/block.js';
-import './on_column_block/index.js';
+import './cd_custom_block/index.js';

@@ -24,11 +24,12 @@ const {
  } = wp.components;
 
 registerBlockType( 'cgb/block-image-clipper', {
-	title: __( 'Image Clipper Block' ), // Block title.
+	title: __( 'CD Image Clipper Block' ), // Block title.
 	icon: 'format-image',
+	description: 'Foobar',
 	category: 'common', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	keywords: [
-		__( 'image-clipper — CGB Block' ),
+		__( 'Image Clipper — CGB Block' ),
 		__( 'CGB Example' ),
 		__( 'create-guten-block' ),
 	],
