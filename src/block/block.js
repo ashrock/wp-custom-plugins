@@ -8,8 +8,8 @@ import './editor.scss';
 const { __ } = wp.i18n;
 const { registerBlockType,
  } = wp.blocks;
-const { 
-	MediaUpload, 
+const {
+	MediaUpload,
 	InspectorControls,
 	BlockAlignmentToolbar
 } = wp.editor;
@@ -17,7 +17,8 @@ const {
 	Button,
 	ResizableBox,
 	IconButton,
-	PanelBody
+	PanelBody,
+	ButtonGroup
  } = wp.components;
 
 registerBlockType( 'cgb/block-image-clipper', {
@@ -161,6 +162,20 @@ registerBlockType( 'cgb/block-image-clipper', {
 			});
 		}
 
+		const onClickNextItemDown = (foo) => {
+			let deltaTop = parseInt(props.attributes.imgTranslateY + props.attributes.height);
+			props.setAttributes({
+				imgTranslateY: deltaTop
+			});
+		}
+
+		const onClickPrevItemUp = (foo) => {
+			let deltaTop = parseInt(props.attributes.imgTranslateY - props.attributes.height);
+			props.setAttributes({
+				imgTranslateY: deltaTop
+			});
+		}
+
 		const colors = [
 			{ name: 'red', color: '#f00' },
 			{ name: 'white', color: '#fff' },
@@ -180,7 +195,7 @@ registerBlockType( 'cgb/block-image-clipper', {
 							<div className="flex-column">
 								<IconButton
 									onClick={ onClickPrevItem }
-									icon="controls-back"
+									icon="arrow-left-alt2"
 									label="Previous Item"
 								/>
 								<IconButton
@@ -192,11 +207,18 @@ registerBlockType( 'cgb/block-image-clipper', {
 						</div>
 						<div className="btn-block">
 							<div className="flex-column">
-								<IconButton
-										onClick={ onClickUpOnePixel }
-										icon="arrow-up"
-										label="Move 1px Up"
-									/>
+								<ButtonGroup>
+									<IconButton
+											onClick={ onClickUpOnePixel }
+											icon="arrow-up"
+											label="Move 1px Up"
+										/>
+									<IconButton
+											onClick={ onClickPrevItemUp }
+											icon="arrow-up-alt2"
+											label="Previous Item Up"
+										/>
+								</ButtonGroup>
 								<ResizableBox
 									className="image-clipper"
 									size={{
@@ -247,11 +269,18 @@ registerBlockType( 'cgb/block-image-clipper', {
 										)
 									}
 								</ResizableBox>
-								<IconButton
-										onClick={ onClickDownOnePixel }
-										icon="arrow-down"
-										label="Move 1px Down"
-									/>
+								<ButtonGroup>
+									<IconButton
+											onClick={ onClickDownOnePixel }
+											icon="arrow-down"
+											label="Move 1px Down"
+										/>
+									<IconButton
+											onClick={ onClickNextItemDown }
+											icon="arrow-down-alt2"
+											label="Next Item Down"
+										/>
+								</ButtonGroup>
 							</div>
 
 						</div>
@@ -259,7 +288,7 @@ registerBlockType( 'cgb/block-image-clipper', {
 							<div className="flex-column">
 								<IconButton
 									onClick={ onClickNextItem }
-									icon="controls-forward"
+									icon="arrow-right-alt2"
 									label="Next Item"
 								/>
 								<IconButton
@@ -295,7 +324,7 @@ registerBlockType( 'cgb/block-image-clipper', {
 								});
 							}}
 					/>
-					</PanelBody>					
+					</PanelBody>
 				</InspectorControls>
 			</div>
 		);
