@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name: CD Custom Plugins
- * Plugin URI: https://github.com/ahmadawais/create-guten-block/
+ * Plugin URI: https://github.com/ashrock/wp-custom-plugins
  * Description: Includes CD Image Sprite Clipper, CD Customizable Block
  * Author: Ashrock West
- * Author URI: https://fb.com/ashrockwest
+ * Author URI: https://www.facebook.com/ashrockwest
  * Version: 0.0.1
  * License: GPL2+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt

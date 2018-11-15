@@ -11,22 +11,19 @@ const { registerBlockType,
 const { 
 	MediaUpload, 
 	InspectorControls,
-	AlignmentToolbar
+	BlockAlignmentToolbar
 } = wp.editor;
 const {
 	Button,
 	ResizableBox,
 	IconButton,
-	TextControl,
-	RangeControl,
-	ColorPalette,
-	TreeSelect
+	PanelBody
  } = wp.components;
 
 registerBlockType( 'cgb/block-image-clipper', {
 	title: __( 'CD Image Clipper Block' ), // Block title.
 	icon: 'format-image',
-	description: 'Foobar',
+	description: 'Allow importing and displaying of a sprite section from an image spritesheet',
 	category: 'common', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	keywords: [
 		__( 'Image Clipper — CGB Block' ),
@@ -288,100 +285,17 @@ registerBlockType( 'cgb/block-image-clipper', {
 					</div>
 				</div>
 				<InspectorControls>
-					<p>Allow importing and displaying of a sprite section from an image spritesheet</p>
-					<TextControl
-						label="Block ID"
-						value={ props.attributes.blockId }
-						onChange={ ( customID ) => {
-							props.setAttributes({
-								blockId : customID
-							});
-						} }
-					/>
-					<TextControl
-						label="Block Title"
-						value={ props.attributes.blockTitle }
-						onChange={ ( customTitle ) => {
-							props.setAttributes({
-								blockTitle : customTitle
-							});
-						} }
-					/>
-					<TextControl
-						label="Image URL"
-						value={ props.attributes.imgURL }
-						onChange={ ( customUrl ) => {
-							props.setAttributes({
-								imgURL : customUrl
-							});
-						} }
-					/>
-					<RangeControl
-						label="Columns"
-						value={ props.attributes.blockColumns }
-						onChange={ ( column ) => {
-							props.setAttributes({
-								blockColumns : column
-							});
-						}}
-						min={ 2 }
-						max={ 10 }
-					/>
-					<ColorPalette
-						colors={ colors }
-						value={ props.attributes.currentColor }
-						onChange={ ( color ) => {
+					<PanelBody title="Image Alignment">
+						<BlockAlignmentToolbar
+							label="Image Alignment"
+							value={props.attributes.imgAlignment}
+							onChange={ (alignment) => {
 								props.setAttributes({
-									currentColor : color
+									imgAlignment: alignment
 								});
-							}
-						}
+							}}
 					/>
-					<TreeSelect
-						label="Parent page"
-						noOptionLabel="No parent page"
-						onChange={ ( page ) => {
-							props.setAttributes({
-								currentPage: page 
-							})
-						} }
-						selectedId={ props.attributes.currentPage }
-						tree={ [
-							{
-								name: 'Page 1',
-								id: 'p1',
-								children: [
-									{ name: 'Descend 1 of page 1', id: 'p11' },
-									{ name: 'Descend 2 of page 1', id: 'p12' },
-								],
-							},
-							{
-								name: 'Page 2',
-								id: 'p2',
-								children: [
-									{
-										name: 'Descend 1 of page 2',
-										id: 'p21',
-										children: [
-											{
-												name: 'Descend 1 of Descend 1 of page 2',
-												id: 'p211',
-											},
-										],
-									},
-								],
-							},
-						] }
-					/>
-					<AlignmentToolbar
-						label="Image Alignment"
-						value={props.attributes.imgAlignment}
-						onChange={ (alignment) => {
-							props.setAttributes({
-								imgAlignment: alignment
-							});
-						}}
-					/>
+					</PanelBody>					
 				</InspectorControls>
 			</div>
 		);

@@ -12,11 +12,13 @@ const {
 	TextControl,
 	RangeControl,
 	ColorPalette,
+	PanelBody
  } = wp.components;
 
 registerBlockType( 'cgb/cd-custom-block', {
 	title: __( 'CD Customizable Block' ), // Block title.
 	icon: 'format-image',
+	description: 'Powerful content block',
 	category: 'common', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	keywords: [
 		__( 'Customizable-Block — CGB Block' ),
@@ -120,87 +122,96 @@ registerBlockType( 'cgb/cd-custom-block', {
 			<div className='customizable-block-editor' style={divStyle}>
 				<InnerBlocks/>
 				<InspectorControls>
-					<p>Dudung the Greatness</p>
-					<TextControl
-						label="Block ID"
-						value={ props.attributes.blockId }
-						onChange={ ( customID ) => {
-							props.setAttributes({
-								blockId : customID
-							});
-						} }
-					/>
-					<TextControl
-						label="Block Title"
-						value={ props.attributes.blockTitle }
-						onChange={ ( customTitle ) => {
-							props.setAttributes({
-								blockTitle : customTitle
-							});
-						} }
-					/>
-					<RangeControl
-						label="Padding Top"
-						value={ props.attributes.paddingTop }
-						onChange={ ( value ) => {
-							props.setAttributes({
-								paddingTop : value
-							});
-						}}
-						min={ 0 }
-						max={ 100 }
-					/>
-					<RangeControl
-						label="Padding Left/Right"
-						value={ props.attributes.paddingLeft }
-						onChange={ ( value ) => {
-							props.setAttributes({
-								paddingLeft : value
-							});
-						}}
-						min={ 0 }
-						max={ 100 }
-					/>
-					<RangeControl
-						label="Padding Bottom"
-						value={ props.attributes.paddingBottom }
-						onChange={ ( value ) => {
-							props.setAttributes({
-								paddingBottom : value
-							});
-						}}
-						min={ 0 }
-						max={ 100 }
-					/>
-					<ColorPalette
-						label="Background Color"
-						colors={ backgroundColors }
-						value={ props.attributes.backgroundColor }
-						onChange={ ( color ) => {
+					<PanelBody title="Block Meta" initialOpen="false">
+						<TextControl
+							label="Block ID"
+							value={ props.attributes.blockId }
+							onChange={ ( customID ) => {
 								props.setAttributes({
-									backgroundColor : color
+									blockId : customID
 								});
+							} }
+						/>
+						<TextControl
+							label="Block Title"
+							value={ props.attributes.blockTitle }
+							onChange={ ( customTitle ) => {
+								props.setAttributes({
+									blockTitle : customTitle
+								});
+							} }
+						/>
+					</PanelBody>
+					<PanelBody title="Padding Settings" initialOpen="true">
+						<RangeControl
+							label="Padding Top"
+							value={ props.attributes.paddingTop }
+							onChange={ ( value ) => {
+								props.setAttributes({
+									paddingTop : value
+								});
+							}}
+							min={ 0 }
+							max={ 100 }
+						/>
+						<RangeControl
+							label="Padding Left/Right"
+							value={ props.attributes.paddingLeft }
+							onChange={ ( value ) => {
+								props.setAttributes({
+									paddingLeft : value
+								});
+							}}
+							min={ 0 }
+							max={ 100 }
+						/>
+						<RangeControl
+							label="Padding Bottom"
+							value={ props.attributes.paddingBottom }
+							onChange={ ( value ) => {
+								props.setAttributes({
+									paddingBottom : value
+								});
+							}}
+							min={ 0 }
+							max={ 100 }
+						/>
+					</PanelBody>
+					
+					<PanelBody title="Alignment Settings">
+						<AlignmentToolbar
+							label="Overall Text Alignment"
+							value={props.attributes.textAlign}
+							onChange={ (alignment) => {
+								props.setAttributes({
+									textAlign: alignment
+								});
+							}}
+						/>
+					</PanelBody>
+					
+					<PanelBody title="Background Settings">
+						<ColorPalette
+							label="Background Color"
+							colors={ backgroundColors }
+							value={ props.attributes.backgroundColor }
+							onChange={ ( color ) => {
+									props.setAttributes({
+										backgroundColor : color
+									});
+								}
 							}
-						}
-					/>
-					<TextControl
-						label="Image URL"
-						value={ props.attributes.imgURL }
-						onChange={ ( customUrl ) => {
-							props.setAttributes({
-								imgURL : customUrl
-							});
-						} }
-					/>
-					<AlignmentToolbar
-						label="Overall Text Alignment"
-						value={props.attributes.textAlign}
-						onChange={ (alignment) => {
-							props.setAttributes({
-								textAlign: alignment
-							});
-						}}
-					/> 
+						/>
+						<TextControl
+							label="Image URL"
+							value={ props.attributes.imgURL }
+							onChange={ ( customUrl ) => {
+								props.setAttributes({
+									imgURL : customUrl
+								});
+							} }
+						/>
+					</PanelBody>
 				</InspectorControls>
 			</div>
 		);
@@ -232,7 +243,12 @@ registerBlockType( 'cgb/cd-custom-block', {
 		};
 
 		return (
-			<div className="customizable-block" style={divStyle}>
+			<div 
+				className="customizable-block" 
+				style={divStyle}
+				title={ props.attributes.blockTitle }
+				id={ props.attributes.blockId }
+			>
 				<InnerBlocks.Content/>
 			</div>
 		);
