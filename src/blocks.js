@@ -11,5 +11,4 @@
 
 import './block/block.js';
 import './cd_custom_block/index.js';
-import './cd_custom_header/index.js';
-import './cd_custom_header/foo.js';
+import './cd_custom_element/foo.js';

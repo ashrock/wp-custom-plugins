@@ -58,12 +58,17 @@ registerBlockType( 'cgb/cd-custom-block', {
 			type:'number',
 			default: 10,
 		},
+		backgroundOpacity: {
+			type:'number',
+			default: 1,
+		},
 	},
 	/** displayed on editor side */
 	edit: function( props ) {
 		const {
 			attributes: {
 				backgroundColor,
+				backgroundOpacity,
 				height,
 				width,
 				paddingTop,
@@ -74,8 +79,10 @@ registerBlockType( 'cgb/cd-custom-block', {
 			setAttributes,
 		} = props;
 
+		let computedBG = 'rgba('+ hexToRgb(backgroundColor).r +','+ hexToRgb(backgroundColor).g +','+ hexToRgb(backgroundColor).b  +','+ backgroundOpacity +')';
+
 		var divStyle = {
-			backgroundColor,
+			backgroundColor: computedBG,
 			height,
 			width,
 			paddingTop,
@@ -117,6 +124,8 @@ registerBlockType( 'cgb/cd-custom-block', {
 				color: '#ffffff'
 			}
 		];
+
+		
 
 		return (
 			<div className='customizable-block-editor' style={divStyle}>
@@ -211,6 +220,17 @@ registerBlockType( 'cgb/cd-custom-block', {
 								});
 							} }
 						/>
+						<RangeControl
+							label="Background Color Opacity"
+							value={ props.attributes.backgroundOpacity * 100 }
+							onChange={ ( value ) => {
+								props.setAttributes({
+									backgroundOpacity : value/100
+								});
+							}}
+							min={ 0 }
+							max={ 100 }
+						/>
 					</PanelBody>
 				</InspectorControls>
 			</div>
@@ -221,6 +241,7 @@ registerBlockType( 'cgb/cd-custom-block', {
 		const {
 			attributes: {
 				backgroundColor,
+				backgroundOpacity,
 				height,
 				width,
 				paddingTop,
@@ -230,9 +251,10 @@ registerBlockType( 'cgb/cd-custom-block', {
 			},
 			setAttributes,
 		} = props;
+		let computedBG = 'rgba('+ hexToRgb(backgroundColor).r +','+ hexToRgb(backgroundColor).g +','+ hexToRgb(backgroundColor).b  +','+ backgroundOpacity +')';
 
 		var divStyle = {
-			backgroundColor,
+			backgroundColor: computedBG,
 			height,
 			width,
 			paddingTop,
@@ -254,3 +276,17 @@ registerBlockType( 'cgb/cd-custom-block', {
 		);
 	},
 } );
+
+function hexToRgb(hex) {
+	// Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+	var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+	hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+		return r + r + g + g + b + b;
+	});
+	var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+	return result ? {
+		r: parseInt(result[1], 16),
+		g: parseInt(result[2], 16),
+		b: parseInt(result[3], 16)
+	} : null;
+}
