@@ -1,6 +1,8 @@
 var el = wp.element.createElement;
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
+import apiFetch from '@wordpress/api-fetch';
+
 const { 
 	RichText, 
 	BlockControls, 
@@ -53,11 +55,29 @@ registerBlockType( 'mycgb/cd-customizable-element', {
 			type:'number',
 			default: 10,
 		},
+		blockItems: {
+			type:'number',
+			default: 0,
+		},
 
 	},
 
 	//for adding things like a rich text editor, and controls - the editor
 	edit: function( props ) {
+		jQuery( async function( $ ) {
+			await $.ajax( {
+				url: '/get_site_constants',
+				success: function ( data ) {
+					/* fetched data for block settings */
+					console.log(data);
+					props.setAttributes({
+						blockItems: data.items
+					});
+				},
+				cache: false,
+				dataType: 'json'
+			} );
+		} );
 
 		const {
 			attributes: {
@@ -235,7 +255,7 @@ registerBlockType( 'mycgb/cd-customizable-element', {
 
 		return el( RichText.Content, {
 			tagName: props.attributes.tagName,
-			value: content,
+			value: props.attributes.blockItems +' '+ content,
 			style: eltyle
 		} );
 	},
