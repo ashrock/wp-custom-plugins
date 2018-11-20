@@ -69,10 +69,10 @@ registerBlockType( 'mycgb/cd-customizable-element', {
 				url: '/get_site_constants',
 				success: function ( data ) {
 					/* fetched data for block settings */
-					console.log(data);
-					props.setAttributes({
-						blockItems: data.items
-					});
+					// console.log(data);
+					// props.setAttributes({
+					// 	blockItems: data.items
+					// });
 				},
 				cache: false,
 				dataType: 'json'
@@ -255,7 +255,7 @@ registerBlockType( 'mycgb/cd-customizable-element', {
 
 		return el( RichText.Content, {
 			tagName: props.attributes.tagName,
-			value: props.attributes.blockItems +' '+ content,
+			value: content,
 			style: eltyle
 		} );
 	},
