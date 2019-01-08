@@ -49,18 +49,6 @@ registerBlockType( 'cgb/cd-course-schedules', {
 	},
 	/** displayed on editor side */
 	edit: function( props ) {
-		var divStyle = {};
-
-		var schedule_obj = {
-			course_id:``,
-			title:``,
-			location:``,
-			course_dates:``,
-			enrollment_deadline:``,
-			stacks_taught:[],
-			tuition:``,
-		};
-
 		if(typeof props.attributes.blockId == 'undefined')
 		{
 			let timestamp = new Date().getTime();
@@ -108,7 +96,7 @@ registerBlockType( 'cgb/cd-course-schedules', {
 						{
 							console.log(typeof active_response[ column_order[col_id] ]);
 							let td_value = (typeof active_response[ column_order[col_id] ] == `object`) ? active_response[ column_order[col_id] ].join(', ') : active_response[ column_order[col_id] ];
-							let td_el = el('td',{}, td_value);
+							let td_el = el('td',{ className: column_order[col_id]}, td_value);
 							row_data.push(td_el);
 						}
 
@@ -159,7 +147,7 @@ registerBlockType( 'cgb/cd-course-schedules', {
 
 				for(let tdi in td_items)
 				{
-					let td = el('td',{}, td_items[tdi].props.children);
+					let td = el('td',td_items[tdi].props, td_items[tdi].props.children);
 					row_data.push(td);
 				}
 
@@ -175,9 +163,9 @@ registerBlockType( 'cgb/cd-course-schedules', {
 				<Button onClick={loadData}>Load data</Button>
 				<table><thead>{ populateHeaders() }</thead><tbody>{ populateData() }</tbody></table>
 				<InspectorControls>
-					<PanelBody title="Course Settings" initialOpen="true">
+					<PanelBody title="API Data" initialOpen="true">
 						<TextControl
-							label="Request URL"
+							label="API URL"
 							value={ props.attributes.requestUrl }
 							onChange={ ( requestUrl ) => {
 								props.setAttributes({
