@@ -125,7 +125,7 @@ registerBlockType( 'cgb/cd-custom-block', {
 			}
 		];
 
-		
+
 
 		return (
 			<div className='customizable-block-editor' style={divStyle}>

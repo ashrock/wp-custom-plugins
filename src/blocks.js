@@ -12,3 +12,4 @@
 import './block/block.js';
 import './cd_custom_block/index.js';
 import './cd_custom_element/foo.js';
+import './cd_course_schedule/cd_course_schedule.js';
