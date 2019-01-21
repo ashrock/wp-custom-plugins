@@ -8,7 +8,8 @@ const {
 	RichText,
 	InnerBlocks,
 	InspectorControls,
-	AlignmentToolbar
+	AlignmentToolbar,
+	BlockSettingsMenu,
 } = wp.editor;
 const {
 	Button,
@@ -19,6 +20,9 @@ const {
 	PanelBody,
 	TabPanel,
  } = wp.components;
+const {
+	Fragment
+ } = wp.element;
 
 registerBlockType( 'cgb/cd-itemized-block', {
 	title: __( 'CD Itemized Block' ), // Block title.
@@ -87,32 +91,12 @@ registerBlockType( 'cgb/cd-itemized-block', {
 		}
 
 		const onSelectPostType = async ( post_type ) => {
-			await fetchData('/get_wp_post', { post_type : post_type }, (post_data) => {
-				let itemData = [];
-				post_data.map( (wp_post, key) =>{
-					let item_obj = [];
-					/** create an element foreach property-value pair */
-					for(let prop in wp_post)
-					{
-						item_obj.push(
-							el( //the richtext editor
-								'div',
-								{
-									key: 'editable',
-									value: wp_post[prop],
-								},
-								wp_post[prop].toString()
-							)
-						)
-					}
+			props.setAttributes( { postTypeValue: post_type } );
 
-					itemData.push( el('div',{ className:'itemized_block', style:{border:`1px solid #000`}}, item_obj) );
-				});
-
+			await fetchData('/get_wp_post', { post_type : post_type }, async (post_data) => {
+				let itemData = post_data;
 				props.setAttributes( { itemData: itemData } );
 			});
-
-			props.setAttributes( { postTypeValue: post_type } )
 		}
 
 		const onSelect = ( tabName ) => {
@@ -120,19 +104,45 @@ registerBlockType( 'cgb/cd-itemized-block', {
 		};
 
 		const renderItems = () => {
-			let itemData = [];
-			for(let item_id in props.attributes.itemData)
+			let itemData = props.attributes.itemData;
+			const TEMPLATE = [];
+
+			if(itemData.length > 0)
 			{
-				// itemData.push( props.attributes.itemData[item_id] );
-				itemData.push( el('div',{className:'itemized_block', style:{border:`1px solid #000`}}, props.attributes.itemData[item_id].props.children) );
+				let content_columns = [];
+				for(let item_id in itemData)
+				{
+					let post_props = itemData[item_id];
+					let post_content = []
+					content_columns.push(
+						[
+							'core/column', {},
+							[
+								[
+									'cgb/cd-custom-block',
+									{},
+									[
+										[ 'mycgb/cd-customizable-element', { placeholder: 'Enter side content...', content: post_props.post_title }],
+										[ 'mycgb/cd-customizable-element', { placeholder: 'Enter side content...', content: post_props.post_excerpt }]
+									]
+								]
+							]
+						]
+					);
+				}
+
+				TEMPLATE.push(
+					[ 'core/columns', {}, content_columns]
+				);
 			}
 
-			return itemData;
+			return <InnerBlocks template={ TEMPLATE } templateInsertUpdatesSelection={true} templateLock={false}/>;
 		};
 
+		const content = renderItems();
 		return (
 			<div className='customizable-block-editor'>
-				{ renderItems() }
+				{ content }
 				<InspectorControls>
 					<PanelBody title="API Data" initialOpen="true">
 						{/** LOAD OPTIONS USING  */}
@@ -170,22 +180,12 @@ registerBlockType( 'cgb/cd-itemized-block', {
 	},
 	/** displayed to outside world */
 	save: function( props ) {
-		const renderItems = () => {
-			let itemData = [];
-			for(let item_id in props.attributes.itemData)
-			{
-				// itemData.push( props.attributes.itemData[item_id] );
-				itemData.push( el('div',{className:'itemized_block', style:{border:`1px solid #000`}}, props.attributes.itemData[item_id].props.children) );
-			}
-
-			return itemData;
-		};
 		return (
 			<div
 				className="customizable-block"
 				title={ props.attributes.blockTitle }
 				id={ props.attributes.blockId }
-			>{ renderItems() }</div>
+			><InnerBlocks.Content/></div>
 		);
 	},
 } );

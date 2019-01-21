@@ -3,22 +3,22 @@ const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
 import apiFetch from '@wordpress/api-fetch';
 
-const { 
-	RichText, 
-	BlockControls, 
-	BlockFormatControls, 
-	AlignmentToolbar, 
+const {
+	RichText,
+	BlockControls,
+	BlockFormatControls,
+	AlignmentToolbar,
 	InspectorControls } = wp.editor;
-const { 
-	Button, 
-	Dashicon, 
-	Tooltip, 
-	IconButton, 
-	Toolbar, 
-	PanelBody, 
+const {
+	Button,
+	Dashicon,
+	Tooltip,
+	IconButton,
+	Toolbar,
+	PanelBody,
 	ColorPalette,
 	RangeControl  } = wp.components;
-const { Component, 
+const { Component,
 	Fragment } = wp.element;
 
 //standard registerBlockType init
@@ -224,7 +224,6 @@ registerBlockType( 'mycgb/cd-customizable-element', {
 					</PanelBody>
 				</InspectorControls>
 			)
-		
 		];
 	},
 

@@ -142,7 +142,7 @@ registerBlockType( 'cgb/cd-custom-header', {
 		return (
 			<div className='customizable-block-editor' style={divStyle}>
 				<PlainText/>
-				<BlockFormatControls/>
+				<BlockControls/>
 				<InspectorControls>
 					<PanelBody title="Block Meta" initialOpen="false">
 						<TextControl
