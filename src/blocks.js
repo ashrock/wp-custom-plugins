@@ -11,6 +11,7 @@
 
 import './block/block.js';
 import './cd_custom_block/index.js';
-import './cd_custom_element/foo.js';
 import './cd_course_schedule/cd_course_schedule.js';
 import './cd_itemized_block/cd_itemized_block.js';
+import './cd-custom-headers/block.js';
+import './cd-custom-paragraph/block.js';

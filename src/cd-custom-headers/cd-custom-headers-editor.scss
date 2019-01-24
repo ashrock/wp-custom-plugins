@@ -1,0 +1,73 @@
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+
+h1 { font-size: 24px;}
+h2 { font-size: 22px;}
+h3 { font-size: 18px;}
+h4 { font-size: 16px;}
+h5 { font-size: 12px;}
+h6 { font-size: 10px;}
+
+h1, h2, h3, h4, h5, h6 {
+  // font-family: 'OpenSans-ExtraBold';
+  strong, em,  del, u{
+    font-family: inherit;
+  }
+}
+
+
+.heading-level-One{
+  &::after{
+    content: '1';
+    display: inline-block;
+    vertical-align: middle;
+    height: 2px;
+  }
+}
+
+.heading-level-Two{
+  &::after{
+    content: '2';
+    display: inline-block;
+    vertical-align: middle;
+    height: 2px;
+  }
+}
+
+.heading-level-Three{
+  &::after{
+    content: '3';
+    display: inline-block;
+    vertical-align: middle;
+    height: 2px;
+  }
+}
+
+.heading-level-Four{
+  &::after{
+    content: '4';
+    display: inline-block;
+    vertical-align: middle;
+    height: 2px;
+  }
+}
+.heading-level-Five{
+  &::after{
+    content: '5';
+    display: inline-block;
+    vertical-align: middle;
+    height: 2px;
+  }
+}
+.heading-level-Six{
+  &::after{
+    content: '6';
+    display: inline-block;
+    vertical-align: middle;
+    height: 2px;
+  }
+}

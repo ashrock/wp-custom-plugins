@@ -64,3 +64,83 @@
     -webkit-transition: opacity 0.5s;
     -o-transition: opacity 0.5s;
     transition: opacity 0.5s; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+h1 {
+  font-size: 24px; }
+
+h2 {
+  font-size: 22px; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 12px; }
+
+h6 {
+  font-size: 10px; }
+
+h1 strong, h1 em, h1 del, h1 u, h2 strong, h2 em, h2 del, h2 u, h3 strong, h3 em, h3 del, h3 u, h4 strong, h4 em, h4 del, h4 u, h5 strong, h5 em, h5 del, h5 u, h6 strong, h6 em, h6 del, h6 u {
+  font-family: inherit; }
+
+.heading-level-One::after {
+  content: '1';
+  display: inline-block;
+  vertical-align: middle;
+  height: 2px; }
+
+.heading-level-Two::after {
+  content: '2';
+  display: inline-block;
+  vertical-align: middle;
+  height: 2px; }
+
+.heading-level-Three::after {
+  content: '3';
+  display: inline-block;
+  vertical-align: middle;
+  height: 2px; }
+
+.heading-level-Four::after {
+  content: '4';
+  display: inline-block;
+  vertical-align: middle;
+  height: 2px; }
+
+.heading-level-Five::after {
+  content: '5';
+  display: inline-block;
+  vertical-align: middle;
+  height: 2px; }
+
+.heading-level-Six::after {
+  content: '6';
+  display: inline-block;
+  vertical-align: middle;
+  height: 2px; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */

@@ -15,11 +15,11 @@ const {
 	PanelBody
  } = wp.components;
 
-registerBlockType( 'cgb/cd-custom-block', {
-	title: __( 'CD Customizable Block' ), // Block title.
+registerBlockType( 'cgb/cd-custom-block-2', {
+	title: __( 'CD Customizable Blocks' ), // Block title.
 	icon: 'welcome-write-blog',
 	description: 'Powerful content block',
-	category: 'common', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
+	category: 'formatting', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	keywords: [
 		__( 'Customizable-Block — CGB Block' ),
 		__( 'CGB Example' ),
@@ -34,7 +34,7 @@ registerBlockType( 'cgb/cd-custom-block', {
 		},
 		backgroundColor : {
 			type: 'string',
-			default: '#ffffff'
+			default: 'rgba(255,255,255,1)'
 		},
 		textAlign : {
 			type: 'string',
@@ -79,10 +79,10 @@ registerBlockType( 'cgb/cd-custom-block', {
 			setAttributes,
 		} = props;
 
-		let computedBG = 'rgba('+ hexToRgb(backgroundColor).r +','+ hexToRgb(backgroundColor).g +','+ hexToRgb(backgroundColor).b  +','+ backgroundOpacity +')';
+		// let computedBG = 'rgba('+ hexToRgb(props.attributes.backgroundColor).r +','+ hexToRgb(props.attributes.backgroundColor).g +','+ hexToRgb(props.attributes.backgroundColor).b  +','+ backgroundOpacity +')';
 
 		var divStyle = {
-			backgroundColor: computedBG,
+			backgroundColor: backgroundColor,
 			height,
 			width,
 			paddingTop,
@@ -107,6 +107,13 @@ registerBlockType( 'cgb/cd-custom-block', {
 			} );
 		}
 
+		if(typeof props.attributes.backgroundColor == 'undefined')
+		{
+			setAttributes( {
+				backgroundColor: 'rgba(255,255,255,1)',
+			} );
+		}
+
 		const backgroundColors = [
 			{
 				name: 'Puerto Rico',
@@ -117,11 +124,6 @@ registerBlockType( 'cgb/cd-custom-block', {
 				name: 'Butterfly Bush',
 				slug: 'butterfly-bush',
 				color: '#5151a0'
-			},
-			{
-				name: 'White',
-				slug: 'white',
-				color: '#ffffff'
 			}
 		];
 
@@ -203,10 +205,11 @@ registerBlockType( 'cgb/cd-custom-block', {
 						<ColorPalette
 							label="Background Color"
 							colors={ backgroundColors }
-							value={ props.attributes.backgroundColor }
+							value={ rgb2hex(props.attributes.backgroundColor) }
 							onChange={ ( color ) => {
+									console.log(color);
 									props.setAttributes({
-										backgroundColor : color
+										backgroundColor : 'rgba('+ hexToRgb(color).r +','+ hexToRgb(color).g +','+ hexToRgb(color).b  +','+ props.attributes.backgroundOpacity +')'
 									});
 								}
 							}
@@ -251,10 +254,10 @@ registerBlockType( 'cgb/cd-custom-block', {
 			},
 			setAttributes,
 		} = props;
-		let computedBG = 'rgba('+ hexToRgb(backgroundColor).r +','+ hexToRgb(backgroundColor).g +','+ hexToRgb(backgroundColor).b  +','+ backgroundOpacity +')';
+		// let computedBG = 'rgba('+ hexToRgb(props.attributes.backgroundColor).r +','+ hexToRgb(props.attributes.backgroundColor).g +','+ hexToRgb(props.attributes.backgroundColor).b  +','+ backgroundOpacity +')';
 
 		var divStyle = {
-			backgroundColor: computedBG,
+			backgroundColor: backgroundColor,
 			height,
 			width,
 			paddingTop,
@@ -289,4 +292,13 @@ function hexToRgb(hex) {
 		g: parseInt(result[2], 16),
 		b: parseInt(result[3], 16)
 	} : null;
+}
+
+function rgb2hex(rgb){
+	rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+
+	return (rgb && rgb.length === 4) ? "#" +
+	 ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+	 ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+	 ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : '';
 }
