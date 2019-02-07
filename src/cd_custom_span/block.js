@@ -1,33 +1,27 @@
 /**
- * BLOCK: cd-custom-headers
+ * BLOCK: cd-custom-span
  *
  * Registering a basic block with Gutenberg.
  * Simple block, renders and saves the same content without any interactivity.
  */
 
 //  Import CSS.
-import './cd-custom-headers-style.scss';
-import './cd-custom-headers-editor.scss';
+import './cd_custom_span_style.scss';
+import './cd_custom_span_editor.scss';
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
-
 const { PanelBody, 
 	RangeControl,
-	Toolbar,
-	IconButton,
 	ColorPalette,
-	TextControl
+	TextControl,
+	ToggleControl
 } = wp.components;
 
 const { RichText, 
 	InspectorControls,
 	AlignmentToolbar,
-	BlockControls,
 } = wp.editor;
-
-var el = wp.element.createElement;
-
 
 /**
  * Register: aa Gutenberg Block.
@@ -42,13 +36,14 @@ var el = wp.element.createElement;
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
-registerBlockType( 'cgb/block-cd-custom-headers', {
+
+registerBlockType( 'cgb/block-cd-custom-span', {
 	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-	title: __( 'CD Custom Headers' ), // Block title.
+	title: __( 'CD Custom Span' ), // Block title.
 	icon: 'welcome-write-blog', // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
 	category: 'common', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	keywords: [
-		__( 'cd-custom-headers — CGB Block' ),
+		__( 'cd-custom-span — CGB Block' ),
 		__( 'CGB Example' ),
 		__( 'create-guten-block' ),
 	],
@@ -56,11 +51,7 @@ registerBlockType( 'cgb/block-cd-custom-headers', {
 	attributes: {
 		content: {
 			source: 'html',
-			selector: '.cd-custom-headings'
-		},
-		backgroundColor : {
-			type: 'string',
-			default: 'rgba(255,255,255,1)'
+			selector: '.cd-custom-span',
 		},
 		color: {
 			type: 'string',
@@ -68,7 +59,7 @@ registerBlockType( 'cgb/block-cd-custom-headers', {
 		},
 		fontsize: {
 			type: 'number',
-			default: 24
+			default: 18
 		},
 
 		// Set paddings for default
@@ -106,139 +97,94 @@ registerBlockType( 'cgb/block-cd-custom-headers', {
 			type: 'number',
 			default: 0
 		}, 
-
-		//Text Alignment
 		align: {
 			type: 'string',
 			default: 'left'
 		},
-
-		//Change Heading Levels
-		tagName: {
-			type: 'string',
-			default: 'h1'
-		},
-
-		//Margin auto
-		center: {
-			type: 'string',
-			default: ''
-		},
-
-		//Set backgroundcolor
 		backgroundColor: {
 			type: 'string',
-			default: '#FFF'
+			default: 'rgba(255, 255, 255, 0)'
 		},
-
+		span_id: {
+			type: 'string'
+		},
+		control: {
+			type: 'string',
+			default: false
+		},
+		display: {
+			type: 'string'
+		},
 		backgroundOpacity: {
 			type: 'number',
 			default: 100
-		},
-
-		//Set Custom id
-		id: {
-			type: 'string'
 		}
 	},
 
 	
-	edit: function( props, classNames ) {
-
+	edit: function( props ) {
+		
 		const Style = {
 			fontSize: props.attributes.fontsize + 'px',
 			color: props.attributes.color,
-
-			//Set style for paddings to take effect
 			paddingTop: props.attributes.paddingTop + 'px',
 			paddingBottom: props.attributes.paddingBottom + 'px',
 			paddingLeft: props.attributes.paddingLeft + 'px',
 			paddingRight: props.attributes.paddingRight + 'px',
-
-			//Set style for margins to take effect
-			marginTop: props.attributes.marginTop + 'px',
+			marginTop: props.attributes.marginTop	 + 'px',
 			marginBottom: props.attributes.marginBottom + 'px',
 			marginLeft: props.attributes.marginLeft + 'px',
 			marginRight: props.attributes.marginRight + 'px',
-
-			//Align text
 			textAlign: props.attributes.align,
-
-
-			//Setbackground Colors
+			margin: props.attributes.center,
 			backgroundColor: props.attributes.backgroundColor,
+			display: props.attributes.display
 		}
 
 		const colors = [ 
-			{ name: 'black', color: '#000' },
-			{ name: 'blue', color: '#00f' },
+			{ name: 'black', color: '#000' }, 
+			{ name: 'blue', color: '#00f' }, 
 			{ name: 'transparent', color: 'rgba(255, 255, 255, 0)'}
 		];	
 
 		const empty = [];
 
-		function changeElement(tagName, size) {
-			props.setAttributes( { tagName } );
-			props.setAttributes( { fontsize : size } );
-		}
-
-		if(typeof props.attributes.id == 'undefined')
+		if(typeof props.attributes.span_id == 'undefined')
 		{
 			let timestamp = new Date().getTime();
 			props.setAttributes( {
-				id: 'heading_' + timestamp
+				span_id: 'span_' + timestamp
 			} );
 		}
 
 		return [
 			(
-				// Function to replace anything inside the paragraph
+				// Function to replace anything inside the span
 				<RichText
-					key = { 'editable' }
-					tagName = { props.attributes.tagName }
-					className = { 'cd-custom-headings' }
-					title = { 'heading' }
-					style = { Style }
-					onChange = { ( newValue ) => {
+					key = {'editable'}
+					tagName="span"
+					className={ 'cd-custom-span' }
+					title={ 'Coding Dojo custom span' }
+					style={ Style }
+					value={ props.attributes.content }
+					onChange = { ( value ) => {
 						props.setAttributes({
-								content: newValue
+								content: value
 							});
 						}
-					}
-					value = { props.attributes.content }
+					 }
 				/>
 			),
-		
-			el(
-				BlockControls,{
-					key: 'controls',
-					controls: [
-						{
-							icon: 'heading',
-							subscript: '1',
-							title: __( 'H1' ),
-							onClick: () => {changeElement('h1', 24)}
-						},
-						{
-							icon: 'heading',
-							subscript: '2',
-							title: __( 'H2' ),
-							onClick: () => {changeElement('h2', 22)}
-						},
-					]
-				}
-			),
-
 			(
 				// Functions to modify the paragraph
 				<InspectorControls>
-					<PanelBody title={'Heading ID'}>
+					<PanelBody title={'Span ID'}>
 						<TextControl
-							label={'Set Heading ID'}
-							value={props.attributes.id}
+							label={'Set Span ID'}
+							value={props.attributes.span_id}
 							onChange={ (value) => {
 								props.setAttributes({
-									id: value
+									span_id: value
 								});
 							}} 
 						/>
@@ -255,58 +201,43 @@ registerBlockType( 'cgb/block-cd-custom-headers', {
 							min={ 0 }
 							max={ 100 }>
 						</RangeControl>
-
 					</PanelBody>
 
-					<PanelBody title={'Text Alignment'}>
+					<PanelBody title='Text Alignment'>
 						<AlignmentToolbar 
 							value= {props.attributes.align}
+							con
 							onChange={ (value) => {
 								props.setAttributes({
-									align : value
+									align: value
 								});
 							}}
 						/>
 					</PanelBody>
 
-					<PanelBody title={'Heading Levels'}>
-						<Toolbar>
-							<IconButton 
-								className={'heading-level-One'}
-								icon="heading"
-								label="h1"
-								title={'headings'}
-								onClick={ () => {changeElement('h1', 24)} }/>
+					<PanelBody title={'Display Block'}>
+						<ToggleControl 
+							help={ props.attributes.control ? 'Display Block Enabled.' : 'Display Block Disabled.' }
+							checked={ props.attributes.control }
+							onChange={ () => {
+								props.setAttributes({
+									control: !props.attributes.control
+								})
 
-							<IconButton 
-								className={'heading-level-Two'}
-								icon="heading"
-								label="h2"
-								onClick={ () => {changeElement('h2', 22)} }/>
-
-							<IconButton 
-								className={'heading-level-Three'}
-								icon="heading"
-								label="h3"
-								onClick={ () => {changeElement('h3', 18)} }/>
-							<IconButton 
-								className={'heading-level-Four'}
-								icon="heading"
-								label="h4"
-								onClick={ () => {changeElement('h4', 16)} }/>
-							<IconButton 
-								className={'heading-level-Five'}
-								icon="heading"
-								label="h5"
-								onClick={ () => {changeElement('h5', 12)} }/>
-							<IconButton 
-								className={'heading-level-Six'}
-								icon="heading"
-								label="h6"
-								onClick={ () => {changeElement('h6', 10)} }/>
-						</Toolbar>
+								if(props.attributes.control){
+									props.setAttributes({
+										display: ''
+									});
+								}
+								else if(!props.attributes.control) {
+									props.setAttributes({
+										display: 'block'
+									})
+								}
+							}}
+						/>
 					</PanelBody>
-					
+
 					<PanelBody title={'Margins'}>
 						<RangeControl
 							label = "Margin Top"
@@ -406,7 +337,7 @@ registerBlockType( 'cgb/block-cd-custom-headers', {
 							max={ 100 }>
 						</RangeControl>
 					</PanelBody>
-
+		
 					<PanelBody title={'Text Color'}>
 						<ColorPalette 
 							label="Text Color"
@@ -416,10 +347,8 @@ registerBlockType( 'cgb/block-cd-custom-headers', {
 								props.setAttributes({
 									color: color
 								})
-							}} 
+							} } 
 						/>
-
-						
 					</PanelBody>
 
 					<PanelBody title="Background Color">
@@ -430,7 +359,7 @@ registerBlockType( 'cgb/block-cd-custom-headers', {
 								props.setAttributes({
 									backgroundColor : 'rgba('+ hexToRgb(color).r +','+ hexToRgb(color).g +','+ hexToRgb(color).b  +','+ props.attributes.backgroundOpacity +')'
 								})
-							}} 
+							} } 
 						/>
 
 						<RangeControl
@@ -467,40 +396,29 @@ registerBlockType( 'cgb/block-cd-custom-headers', {
 		const Style = {
 			fontSize: props.attributes.fontsize + 'px',
 			color: props.attributes.color,
-
-			//Set style for paddings to take effect
 			paddingTop: props.attributes.paddingTop + 'px',
 			paddingBottom: props.attributes.paddingBottom + 'px',
 			paddingLeft: props.attributes.paddingLeft + 'px',
 			paddingRight: props.attributes.paddingRight + 'px',
-
-			//Set style for margins to take effect
-			marginTop: props.attributes.marginTop + 'px',
+			marginTop: props.attributes.marginTop	 + 'px',
 			marginBottom: props.attributes.marginBottom + 'px',
 			marginLeft: props.attributes.marginLeft + 'px',
 			marginRight: props.attributes.marginRight + 'px',
-
-			//Align text
 			textAlign: props.attributes.align,
-
-			//Margin 0px auto
-			// margin: props.attributes.center,
-
-			//Setbackground Colors
+			margin: props.attributes.center,
 			backgroundColor: props.attributes.backgroundColor,
-			// opacity: props.attributes.backgroundOpacity
+			display: props.attributes.display
 		}
-
 		return (
 			<RichText.Content
-				tagName = {props.attributes.tagName}
-				id={ props.attributes.id }
-				className = { 'cd-custom-headings' }
-				title = { 'heading' }
-				style = { Style }
+				tagName="span"
+				id={ props.attributes.span_id }
+				className={ 'cd-custom-span' }
+				title={ 'Coding Dojo custom span' }
+				style={ Style }
 				value={ props.attributes.content }
 			/>
-		)
+		);
 	},
 } );
 

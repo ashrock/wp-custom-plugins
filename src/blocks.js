@@ -15,3 +15,6 @@ import './cd_course_schedule/cd_course_schedule.js';
 import './cd_itemized_block/cd_itemized_block.js';
 import './cd-custom-headers/block.js';
 import './cd-custom-paragraph/block.js';
+import './cd-custom-buttons/block.js';
+import './cd-sample/block.js';
+import './cd_custom_span/block.js'

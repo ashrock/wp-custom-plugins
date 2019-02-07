@@ -12,11 +12,10 @@ import './editor.scss';
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
 
-const { PanelBody,
-		Toolbar,
-		IconButton, 
+const { PanelBody, 
 		RangeControl,
-		ColorPalette
+		ColorPalette,
+		TextControl
 } = wp.components;
 
 const { RichText, 
@@ -99,11 +98,20 @@ registerBlockType( 'cgb/block-sample-guten-plugin', {
 			type: 'string',
 			default: 'left'
 		},
-		backgroundColor: {
+		backgroundColor : {
+			type: 'string',
+			default: 'rgba(255,255,255,1)'
+		},
+		backgroundOpacity: {
+			type: 'number',
+			default: 100
+		},
+		paragraph_id: {
 			type: 'string'
 		}
-	
 	},
+
+	
 
 	edit: function( props ) {
 
@@ -120,14 +128,24 @@ registerBlockType( 'cgb/block-sample-guten-plugin', {
 			marginRight: props.attributes.marginRight + 'px',
 			textAlign: props.attributes.align,
 			margin: props.attributes.center,
-			backgroundColor: props.attributes.backgroundColor
+			backgroundColor: props.attributes.backgroundColor,
 		}
 
 		const colors = [ 
 			{ name: 'black', color: '#000' }, 
-			{ name: 'red', color: '#f00' }, 
-			{ name: 'blue', color: '#00f' }, 
+			{ name: 'blue', color: '#00f' },
+			{ name: 'transparent', color: 'rgba(255, 255, 255, 0)'}
 		];	
+
+		const empty = [];
+
+		if(typeof props.attributes.paragraph_id == 'undefined')
+		{
+			let timestamp = new Date().getTime();
+			props.setAttributes( {
+				paragraph_id: 'paragraph_' + timestamp
+			} );
+		}
 
 		return [
 			(
@@ -150,6 +168,18 @@ registerBlockType( 'cgb/block-sample-guten-plugin', {
 			(
 				// Functions to modify the paragraph
 				<InspectorControls>
+					<PanelBody title={'Paragraph ID'}>
+						<TextControl
+							label={'Set Paragraph ID'}
+							value={props.attributes.paragraph_id}
+							onChange={ (value) => {
+								props.setAttributes({
+									paragraph_id: value
+								});
+							}} 
+						/>
+					</PanelBody>
+
 					<PanelBody title={'Font Size'}>
 						<RangeControl
 							value ={ props.attributes.fontsize }
@@ -225,34 +255,6 @@ registerBlockType( 'cgb/block-sample-guten-plugin', {
 						</RangeControl>
 					</PanelBody>
 
-					<PanelBody title={'Margin Auto'}>
-						<Toolbar>
-							<IconButton 
-							title={'Margin Auto'}
-							className={'Auto-Margin'}
-							icon="align-center"
-							label="Auto margin"
-							title={'Auto'}
-							onClick={ () => {
-								props.setAttributes({
-									center: '0 auto'
-								});
-							}}/>
-
-							<IconButton 
-							title={'Remove Margin'}
-							className={'Remove-Margin'}
-							icon="no"
-							label="Remove Margin Auto"
-							title={'Remove'}
-							onClick={ () => {
-								props.setAttributes({
-									center: ''
-								});
-							}}/>
-						</Toolbar>
-					</PanelBody>
-
 					<PanelBody title={'Paddings'}>
 						<RangeControl
 							label = "Padding top"
@@ -318,13 +320,38 @@ registerBlockType( 'cgb/block-sample-guten-plugin', {
 
 					<PanelBody title="Background Color">
 						<ColorPalette 
-							colors={ colors } 
+							colors={ empty } 
 							value={ props.attributes.backgroundColor }
 							onChange={ ( color ) => {
 								props.setAttributes({
-									backgroundColor: color
+									backgroundColor : 'rgba('+ hexToRgb(color).r +','+ hexToRgb(color).g +','+ hexToRgb(color).b  +','+ props.attributes.backgroundOpacity +')'
 								})
 							} } 
+						/>
+
+						<RangeControl
+							label="Background Color Opacity"
+							value={ props.attributes.backgroundOpacity * 100 }
+							onChange={ ( value ) => {
+
+								var background_color = props.attributes.backgroundColor;
+								var rgb = background_color.match(/\d+/g);
+
+
+								console.log(props.attributes.backgroundColor);
+				
+								props.setAttributes({
+									backgroundOpacity : value / 100,
+								});
+
+								var setOpacity = rgb[4] = props.attributes.backgroundOpacity;
+
+								props.setAttributes({
+									backgroundColor: 'rgba('+ rgb[0] +','+ rgb[1] +','+ rgb[2] +','+ setOpacity +')'
+								});
+							}}
+							min={ 0 }
+							max={ 100 }
 						/>
 					</PanelBody>
 				</InspectorControls>
@@ -341,17 +368,18 @@ registerBlockType( 'cgb/block-sample-guten-plugin', {
 			paddingLeft: props.attributes.paddingLeft + 'px',
 			paddingRight: props.attributes.paddingRight + 'px',
 			marginTop: props.attributes.marginTop	 + 'px',
-			marginBottom: props.attributes.marginBottom + 'px',
+			marginBottom: props.attributes.marginBottom + 'px',	
 			marginLeft: props.attributes.marginLeft + 'px',
 			marginRight: props.attributes.marginRight + 'px',
 			textAlign: props.attributes.align,
 			margin: props.attributes.center,
-			backgroundColor: props.attributes.backgroundColor
+			backgroundColor: props.attributes.backgroundColor,
 		}
 
 		return (
 			<RichText.Content
 				tagName="p"
+				id={ props.attributes.paragraph_id }
 				className={ 'cd-custom-paragraph' }
 				title={ 'Coding Dojo custom paragraph' }
 				style={ Style }
@@ -360,3 +388,17 @@ registerBlockType( 'cgb/block-sample-guten-plugin', {
 		)
 	},
 } );
+
+function hexToRgb(hex) {
+	// Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+	var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+	hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+		return r + r + g + g + b + b;
+	});
+	var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+	return result ? {
+		r: parseInt(result[1], 16),
+		g: parseInt(result[2], 16),
+		b: parseInt(result[3], 16)
+	} : null;
+}

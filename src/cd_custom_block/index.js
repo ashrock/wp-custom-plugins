@@ -46,6 +46,10 @@ registerBlockType( 'cgb/cd-custom-block-2', {
 		width: {
 			type:'string',
 		},
+		paddingRight: {
+			type:'number',
+			default: 20,
+		},
 		paddingLeft: {
 			type:'number',
 			default: 20,
@@ -60,7 +64,7 @@ registerBlockType( 'cgb/cd-custom-block-2', {
 		},
 		backgroundOpacity: {
 			type:'number',
-			default: 1,
+			default: 100,
 		},
 	},
 	/** displayed on editor side */
@@ -68,12 +72,12 @@ registerBlockType( 'cgb/cd-custom-block-2', {
 		const {
 			attributes: {
 				backgroundColor,
-				backgroundOpacity,
 				height,
 				width,
 				paddingTop,
 				paddingBottom,
 				paddingLeft,
+				paddingRight,
 				textAlign
 			},
 			setAttributes,
@@ -88,16 +92,16 @@ registerBlockType( 'cgb/cd-custom-block-2', {
 			paddingTop,
 			paddingBottom,
 			paddingLeft,
-			paddingRight: paddingLeft,
+			paddingRight,
 			textAlign
 		};
 
 		if(typeof props.attributes.blockId == 'undefined')
 		{
 			let timestamp = new Date().getTime();
-			setAttributes( {
+			setAttributes({
 				blockId: 'block_' + timestamp
-			} );
+			});
 		}
 
 		if(typeof props.attributes.height == 'undefined')
@@ -110,7 +114,7 @@ registerBlockType( 'cgb/cd-custom-block-2', {
 		if(typeof props.attributes.backgroundColor == 'undefined')
 		{
 			setAttributes( {
-				backgroundColor: 'rgba(255,255,255,1)',
+				backgroundColor: 'rgba(255,255,255,0)',
 			} );
 		}
 
@@ -124,8 +128,14 @@ registerBlockType( 'cgb/cd-custom-block-2', {
 				name: 'Butterfly Bush',
 				slug: 'butterfly-bush',
 				color: '#5151a0'
+			},
+			{ 
+				name: 'transparent', 
+				color: 'rgba(255, 255, 255, 0)'
 			}
 		];
+
+		const empty = [];
 
 
 
@@ -166,7 +176,7 @@ registerBlockType( 'cgb/cd-custom-block-2', {
 							max={ 100 }
 						/>
 						<RangeControl
-							label="Padding Left/Right"
+							label="Padding Left"
 							value={ props.attributes.paddingLeft }
 							onChange={ ( value ) => {
 								props.setAttributes({
@@ -176,6 +186,19 @@ registerBlockType( 'cgb/cd-custom-block-2', {
 							min={ 0 }
 							max={ 100 }
 						/>
+
+						<RangeControl
+							label="Padding Right"
+							value={ props.attributes.paddingRight }
+							onChange={ ( value ) => {
+								props.setAttributes({
+									paddingRight : value
+								});
+							}}
+							min={ 0 }
+							max={ 100 }
+						/>
+
 						<RangeControl
 							label="Padding Bottom"
 							value={ props.attributes.paddingBottom }
@@ -204,17 +227,16 @@ registerBlockType( 'cgb/cd-custom-block-2', {
 					<PanelBody title="Background Settings">
 						<ColorPalette
 							label="Background Color"
-							colors={ backgroundColors }
+							colors={ empty }
 							value={ rgb2hex(props.attributes.backgroundColor) }
 							onChange={ ( color ) => {
-									console.log(color);
 									props.setAttributes({
 										backgroundColor : 'rgba('+ hexToRgb(color).r +','+ hexToRgb(color).g +','+ hexToRgb(color).b  +','+ props.attributes.backgroundOpacity +')'
 									});
 								}
 							}
 						/>
-						<TextControl
+						<TextControl	
 							label="Image URL"
 							value={ props.attributes.imgURL }
 							onChange={ ( customUrl ) => {
@@ -227,8 +249,21 @@ registerBlockType( 'cgb/cd-custom-block-2', {
 							label="Background Color Opacity"
 							value={ props.attributes.backgroundOpacity * 100 }
 							onChange={ ( value ) => {
+
+								var background_color = props.attributes.backgroundColor;
+								var rgb = background_color.match(/\d+/g);
+
+
+								console.log(rgb);
+				
 								props.setAttributes({
-									backgroundOpacity : value/100
+									backgroundOpacity : value / 100,
+								});
+
+								var setOpacity = rgb[4] = props.attributes.backgroundOpacity;
+
+								props.setAttributes({
+									backgroundColor: 'rgba('+ rgb[0] +','+ rgb[1] +','+ rgb[2] +','+ setOpacity +')'
 								});
 							}}
 							min={ 0 }
@@ -244,12 +279,12 @@ registerBlockType( 'cgb/cd-custom-block-2', {
 		const {
 			attributes: {
 				backgroundColor,
-				backgroundOpacity,
 				height,
 				width,
 				paddingTop,
 				paddingBottom,
 				paddingLeft,
+				paddingRight,
 				textAlign,
 			},
 			setAttributes,
@@ -263,7 +298,7 @@ registerBlockType( 'cgb/cd-custom-block-2', {
 			paddingTop,
 			paddingBottom,
 			paddingLeft,
-			paddingRight: paddingLeft,
+			paddingRight,
 			textAlign,
 		};
 

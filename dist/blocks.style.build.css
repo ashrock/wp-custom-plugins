@@ -109,3 +109,49 @@ h1 strong, h1 em, h1 del, h1 u, h2 strong, h2 em, h2 del, h2 u, h3 strong, h3 em
  * CSS for just Backend enqueued after style.scss
  * which makes it higher in priority.
  */
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * #.# Styles
+ *
+ * CSS for both Frontend+Backend.
+ */
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+span.button-url {
+  color: #0000FF;
+  margin-bottom: 5px !important;
+  padding: 5px 0 5px 0 !important; }
+
+.components-color-palette__clear {
+  display: none; }
+
+button.url-btn-inserter {
+  border: 1px solid #8D96A0;
+  border-radius: 5px;
+  display: inline-block; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * #.# Styles
+ *
+ * CSS for both Frontend+Backend.
+ */
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
