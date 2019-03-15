@@ -196,7 +196,6 @@ registerBlockType( 'cgb/block-sample-guten-plugin', {
 					<PanelBody title='Text Alignment'>
 						<AlignmentToolbar 
 							value= {props.attributes.align}
-							con
 							onChange={ (value) => {
 								props.setAttributes({
 									align: value

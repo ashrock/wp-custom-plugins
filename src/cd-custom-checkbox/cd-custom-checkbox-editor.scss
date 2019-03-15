@@ -1,0 +1,20 @@
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+.hidden{
+    display: none !important;
+}
+
+.addCheck{
+    display: block !important;
+}
+
+div.select_input_type{
+    button{
+        border: 1px solid #ddd !important;
+        width: 100% !important;
+    }
+}

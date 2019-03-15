@@ -17,4 +17,6 @@ import './cd-custom-headers/block.js';
 import './cd-custom-paragraph/block.js';
 import './cd-custom-buttons/block.js';
 import './cd-sample/block.js';
-import './cd_custom_span/block.js'
+import './cd_custom_span/block.js';
+import './cd-custom-fontawesome/block.js';
+import './cd-custom-checkbox/block.js';

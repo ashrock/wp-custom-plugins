@@ -96,7 +96,7 @@ registerBlockType( 'cgb/block-cd-custom-buttons', {
 		},
 		borderColor: {
 			type: 'string',
-			default: '#FFF'
+			default: '#82D4F0'
 		},
 		borderThickness: {
 			type: 'number',

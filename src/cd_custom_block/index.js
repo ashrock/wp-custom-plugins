@@ -137,8 +137,6 @@ registerBlockType( 'cgb/cd-custom-block-2', {
 
 		const empty = [];
 
-
-
 		return (
 			<div className='customizable-block-editor' style={divStyle}>
 				<InnerBlocks/>

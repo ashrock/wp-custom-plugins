@@ -1,0 +1,182 @@
+[
+  {
+    "IconClass": "fas fa-caret-up"
+  },
+  {
+    "IconClass": "fas fa-caret-down"
+  },
+  {
+    "IconClass": "fas fa-caret-left"
+  },
+  {
+    "IconClass": "fas fa-caret-right"
+  },
+  {
+    "IconClass": "fas fa-caret-square-down"
+  },
+  {
+    "IconClass": "fas fa-caret-square-up"
+  },
+  {
+    "IconClass": "fas fa-caret-square-left"
+  },
+  {
+    "IconClass": "fas fa-caret-square-right"
+  },
+  {
+    "IconClass": "far fa-caret-square-down"
+  },
+  {
+    "IconClass": "far fa-caret-square-up"
+  },
+  {
+    "IconClass": "far fa-caret-square-left"
+  },
+  {
+    "IconClass": "far fa-caret-square-right"
+  },
+  {
+    "IconClass": "fas fa-angle-up"
+  },
+  {
+    "IconClass": "fas fa-angle-down"
+  },
+  {
+    "IconClass": "fas fa-angle-left"
+  },
+  {
+    "IconClass": "fas fa-angle-right"
+  },
+  {
+    "IconClass": "fas fa-angle-double-down"
+  },
+  {
+    "IconClass": "fas fa-angle-double-up"
+  },
+  {
+    "IconClass": "fas fa-angle-double-left"
+  },
+  {
+    "IconClass": "fas fa-angle-double-right"
+  },
+  {
+    "IconClass": "fas fa-arrow-alt-circle-down"
+  },
+  {
+    "IconClass": "fas fa-arrow-alt-circle-up"
+  },
+  {
+    "IconClass": "fas fa-arrow-alt-circle-right"
+  },
+  {
+    "IconClass": "fas fa-arrow-alt-circle-left"
+  },
+  {
+    "IconClass": "far fa-arrow-alt-circle-down"
+  },
+  {
+    "IconClass": "far fa-arrow-alt-circle-up"
+  },
+  {
+    "IconClass": "far fa-arrow-alt-circle-left"
+  },
+  {
+    "IconClass": "far fa-arrow-alt-circle-right"
+  },
+  {
+    "IconClass": "fas fa-arrow-circle-down"
+  },
+  {
+    "IconClass": "fas fa-arrow-circle-up"
+  },
+  {
+    "IconClass": "fas fa-arrow-circle-left"
+  },
+  {
+    "IconClass": "fas fa-arrow-circle-right"
+  },
+  {
+    "IconClass": "fas fa-arrow-down"
+  },
+  {
+    "IconClass": "fas fa-arrow-up"
+  },
+  {
+    "IconClass": "fas fa-arrow-left"
+  },
+  {
+    "IconClass": "fas fa-arrow-right"
+  },
+  {
+    "IconClass": "fab fa-twitter-square"
+  },
+  {
+    "IconClass": "fab fa-twitter"
+  },
+  {
+    "IconClass": "fab fa-google-plus-square"
+  },
+  {
+    "IconClass": "fab fa-google-plus-g"
+  },
+  {
+    "IconClass": "fab fa-facebook-square"
+  },
+  {
+    "IconClass": "fab fa-facebook"
+  },
+  {
+    "IconClass": "fab fa-amazon"
+  },
+  {
+    "IconClass": "fab fa-windows"
+  },
+  {
+    "IconClass": "fab fa-apple"
+  },
+  {
+    "IconClass": "fas fa-trash-alt"
+  },
+  {
+    "IconClass": "far fa-trash-alt"
+  },
+  {
+    "IconClass": "fab fa-android"
+  },
+  {
+    "IconClass": "far fa-check-circle"
+  },
+  {
+    "IconClass": "fas fa-check-circle"
+  },
+  {
+    "IconClass": "fas fa-check"
+  },
+  {
+    "IconClass": "fas fa-chevron-circle-down"
+  },
+  {
+    "IconClass": "fas fa-chevron-circle-up"
+  },
+  {
+    "IconClass": "fas fa-chevron-circle-left"
+  },
+  {
+    "IconClass": "fas fa-chevron-circle-right"
+  },
+  {
+    "IconClass": "fas fa-code"
+  },
+  {
+    "IconClass": "fab fa-html5"
+  },
+  {
+    "IconClass": "fab fa-css3-alt"
+  },
+  {
+    "IconClass": "fab fa-js-square"
+  },
+  {
+    "IconClass": "fab fa-js"
+  }
+]

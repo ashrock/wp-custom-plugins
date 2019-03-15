@@ -155,3 +155,82 @@ button.url-btn-inserter {
  * CSS for just Backend enqueued after style.scss
  * which makes it higher in priority.
  */
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * #.# Styles
+ *
+ * CSS for both Frontend+Backend.
+ */
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+.appear {
+  display: block !important; }
+
+.cd-font-awesome {
+  border: 1px solid #DDD; }
+
+.font-icon-container {
+  border: 1px solid #ddd !important;
+  border-radius: 5px;
+  display: none;
+  height: 130px;
+  margin-top: 5px;
+  margin-bottom: 0;
+  overflow-y: scroll;
+  padding: 10px;
+  width: 100%; }
+
+.icon-text-input {
+  border: 1px solid #ddd !important;
+  display: none;
+  margin-top: 10px;
+  width: 100%; }
+
+.clickable-icons {
+  display: block;
+  border: none;
+  color: #555454;
+  text-decoration: none; }
+
+li.icon-list {
+  display: inline-block;
+  list-style: none;
+  margin-right: 6px; }
+
+.font-icon-container .fab, .font-icon-container .fas, .font-icon-container .far {
+  font-size: 30px !important; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * #.# Styles
+ *
+ * CSS for both Frontend+Backend.
+ */
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+.hidden {
+  display: none !important; }
+
+.addCheck {
+  display: block !important; }
+
+div.select_input_type button {
+  border: 1px solid #ddd !important;
+  width: 100% !important; }
